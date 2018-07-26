@@ -1,0 +1,8 @@
+Credentials cache: API:7B70CD8F-4C0F-48C2-ADE4-D822064440E6
+        Principal: rgidon@42.FR
+
+  Issued                Expires               Principal
+Jul  3 14:33:08 2018  Jul 10 14:33:08 2018  krbtgt/42.FR@42.FR
+Jul  3 14:33:10 2018  Jul 10 14:33:08 2018  ldap/ldap-proxy.42.fr@42.FR
+Jul  3 14:33:10 2018  Jul 10 14:33:08 2018  HTTP/student-storage-1.42.fr@42.FR
+Jul  3 14:47:15 2018  Jul 10 14:33:08 2018  host/vgs-fn1.42.fr@42.FR
