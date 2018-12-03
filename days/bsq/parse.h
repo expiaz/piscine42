@@ -42,7 +42,7 @@ typedef struct	s_grid
 
 int				**ft_parse(int fd, t_header *h);
 int				parse_body(t_buffer *buf, t_grid *grid,
-							t_header *h, int *solvable);
+							t_header *h);
 int				parse_header(t_buffer *buf, t_header *h, t_grid *grid);
 
 #endif

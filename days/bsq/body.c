@@ -35,13 +35,10 @@ int		parse_eol(t_buffer *buf, t_header *h, t_grid *grid)
 	return (1);
 }
 
-int		parse_char(t_buffer *buf, t_header *h, t_grid *grid, int *solvable)
+int		parse_char(t_buffer *buf, t_header *h, t_grid *grid)
 {
 	if (buf->buffer[buf->pos] == h->blank)
-	{
 		grid->tab[grid->height][grid->pos] = -1;
-		*solvable = 1;
-	}
 	else if (buf->buffer[buf->pos] == h->block)
 		grid->tab[grid->height][grid->pos] = 0;
 	else
@@ -50,7 +47,7 @@ int		parse_char(t_buffer *buf, t_header *h, t_grid *grid, int *solvable)
 	return (1);
 }
 
-int		parse_body(t_buffer *buf, t_grid *grid, t_header *h, int *solvable)
+int		parse_body(t_buffer *buf, t_grid *grid, t_header *h)
 {
 	int		ret;
 
@@ -67,7 +64,7 @@ int		parse_body(t_buffer *buf, t_grid *grid, t_header *h, int *solvable)
 				return (0);
 		}
 		if (grid->width > 0)
-			if (!parse_char(buf, h, grid, solvable))
+			if (!parse_char(buf, h, grid))
 				return (0);
 		buf->pos++;
 	}

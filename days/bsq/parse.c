@@ -22,27 +22,32 @@ void	init_grid(t_grid *grid)
 
 int		**ft_parse(int fd, t_header *h)
 {
-	t_buffer	buf;
-	t_grid		grid;
-	int			solvable;
+	t_buffer	*buf;
+	t_grid		*grid;
 
-	solvable = 0;
-	init_grid(&grid);
-	while ((buf.size = read(fd, buf.buffer, CHUNK)) > 0)
+	buf = (t_buffer *) malloc(sizeof(t_buffer));
+	grid = (t_grid *) malloc(sizeof(t_grid));
+
+	init_grid(grid);
+	while ((buf->size = read(fd, buf->buffer, CHUNK)) > 0)
 	{
-		buf.pos = 0;
-		if (grid.header_end == -1)
+		buf->pos = 0;
+		if (grid->header_end == -1)
 		{
-			if (!parse_header(&buf, h, &grid))
+			if (!parse_header(buf, h, grid))
 				return (NULL);
-			buf.pos = grid.header_end;
+			buf->pos = grid->header_end;
 		}
 		else
-			grid.header_end = 0;
-		if (!parse_body(&buf, &grid, h, &solvable))
+			grid->header_end = 0;
+		if (!parse_body(buf, grid, h))
 			return (NULL);
 	}
-	if (buf.size == -1 || solvable == 0 || grid.height != h->height)
+	if (buf->size == -1 || grid->height != h->height)
 		return (NULL);
-	return (grid.tab);
+
+	int **tab = grid->tab;
+	free(buf);
+	free(grid);
+	return (tab);
 }

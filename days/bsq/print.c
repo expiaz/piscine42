@@ -29,10 +29,10 @@ int		ft_print_by_line(int **grid, t_header *h, t_answer *a)
 	t_coords	coords;
 
 	coords.y = -1;
+	if (!(str = (char *)malloc(sizeof(char) * (h->width + 1))))
+		return (0);
 	while (++coords.y < h->height)
 	{
-		if (!(str = (char *)malloc(sizeof(char) * (h->width + 1))))
-			return (0);
 		coords.x = -1;
 		while (++coords.x < h->width)
 			str[coords.x] = ft_choose_char(grid, &coords, h, a);
@@ -40,7 +40,7 @@ int		ft_print_by_line(int **grid, t_header *h, t_answer *a)
 		grid[coords.y] = NULL;
 		str[coords.x] = '\n';
 		write(1, str, h->width + 1);
-		free(str);
 	}
+	free(str);
 	return (1);
 }

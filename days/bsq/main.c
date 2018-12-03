@@ -38,20 +38,30 @@ void	ft_free_run(int fd, int **grid, int height)
 
 int		run(int fd)
 {
-	t_header	header;
-	t_answer	answer;
+	t_header	*header;
+	t_answer	*answer;
+	
+	header = (t_header *) malloc(sizeof(t_header));
+	answer = (t_answer *) malloc(sizeof(t_answer));
+
+	//t_header	header;
+	//t_answer	answer;
 	int			**grid;
 
-	header.height = 0;
-	header.width = 0;
-	if (!(grid = ft_parse(fd, &header)) || !bsq(grid, &header, &answer))
+	header->height = 0;
+	header->width = 0;
+	if (!(grid = ft_parse(fd, header)) || !bsq(grid, header, answer))
 	{
-		ft_free_run(fd, grid, header.height);
+		ft_free_run(fd, grid, header->height);
 		write(1, "map error\n", 10);
 		return (0);
 	}
-	ft_print_by_line(grid, &header, &answer);
+	ft_print_by_line(grid, header, answer);
 	ft_free_run(fd, grid, 0);
+
+	free(header);
+	free(answer);
+
 	return (1);
 }
 
